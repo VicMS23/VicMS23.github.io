@@ -1,0 +1,408 @@
+/* Estilo para centrar la página y darle fondo */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #87CEEB, #b2d9f7); /* Fondo de cielo claro */
+    margin: 0;
+    overflow: hidden; /* Desactiva el scroll */
+    height: 100%;
+}
+
+/* Contenedor principal del libro */
+.book-container {
+    width: 90vw; /* El libro ocupa el 90% del ancho de la pantalla en móviles */
+    height: 70vh; /* Reducimos la altura para móviles */
+    max-width: 600px; /* Máximo ancho del libro en pantallas grandes */
+    perspective: 1500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+/* Páginas del libro */
+.page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #f4e2c5; /* Color café pálido para páginas */
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    color: #5c4c40;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    transform-origin: left; /* Hace que gire desde el lado izquierdo */
+}
+
+/* Portada del libro con una transición más lenta */
+.cover {
+    background-color: #5c4033;
+    color: #f4e2c5;
+    z-index: 5;
+    transition: transform 1.5s ease; /* Transición más lenta para la portada */
+    transform: rotateY(0deg); /* Mantiene la portada en su lugar hasta la animación */
+}
+
+/* Páginas adicionales */
+.page1, .page2, .page3, .page4 {
+    z-index: 4;
+    transform-origin: left;
+    transition: transform 0.8s ease;
+    background-color: #f4e2c5; /* Asegura que no haya fondo blanco */
+}
+
+.page1 {
+    transform: rotateY(-180deg); /* La página 1 comienza con la rotación de 180 grados */
+}
+
+.page2 {
+    transform: rotateY(-180deg);
+}
+
+.page3 {
+    transform: rotateY(-180deg);
+}
+
+.page4 {
+    transform: rotateY(-180deg);
+}
+
+/* Animación para el cambio de página */
+.cover-flipped .cover {
+    transform: rotateY(-180deg); /* Al girar la portada, se voltea */
+}
+
+.cover-flipped .page1 {
+    transform: rotateY(0deg); /* La página 1 aparece inmediatamente después de la portada */
+}
+
+.cover-flipped.page1-flipped .page1 {
+    transform: rotateY(-180deg); /* La página 1 gira para revelar la página 2 */
+}
+
+.cover-flipped.page1-flipped .page2 {
+    transform: rotateY(0deg); /* La página 2 aparece */
+}
+
+.cover-flipped.page1-flipped.page2-flipped .page2 {
+    transform: rotateY(-180deg); /* La página 2 gira para revelar la página 3 */
+}
+
+.cover-flipped.page1-flipped.page2-flipped .page3 {
+    transform: rotateY(0deg); /* La página 3 aparece */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .book-container {
+        width: 90vw; /* El libro ocupa el 90% del ancho de la pantalla */
+        height: 70vh; /* Reducimos la altura del libro */
+    }
+
+    .nav-buttons button {
+        font-size: 1.5rem; /* Reducir el tamaño de los botones */
+        padding: 8px 15px; /* Ajustar tamaño de los botones */
+    }
+
+    /* Ajustar el tamaño de las fuentes dentro del libro */
+    .page h1, .page h2, .page p {
+        font-size: 1.1rem; /* Reducir tamaño de fuente para dispositivos móviles */
+    }
+
+    .page {
+        padding: 15px; /* Menos padding para una mejor vista en dispositivos móviles */
+    }
+
+    /* Ajustar la página */
+    .page p {
+        font-size: 14px; /* Ajustar el tamaño del texto */
+        line-height: 1.5;
+    }
+}
+
+
+/* Asegurarse de que el contenedor del libro tenga suficiente espacio */
+.book-container {
+    position: relative;
+    padding-bottom: 50px; /* Para dejar espacio para los botones */
+}
+
+/* Los botones de navegación */
+.nav-buttons {
+    position: fixed;
+    bottom: 10px;  /* Colocarlos en la parte inferior */
+    left: 50%;     /* Centrar los botones horizontalmente */
+    transform: translateX(-50%);  /* Centrado exacto */
+    display: flex;
+    justify-content: space-between;
+    width: 60%;  /* Ancho del contenedor de los botones */
+    z-index: 10; /* Asegurarse de que estén por encima de otros elementos */
+}
+
+.nav-buttons button {
+    background-color: #333;  /* Fondo de los botones */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-buttons button:hover {
+    background-color: #555;  /* Efecto al pasar el ratón */
+}
+
+/* Estilo para móviles (por si es necesario ajustar la visualización) */
+@media screen and (max-width: 768px) {
+    .nav-buttons button {
+        font-size: 18px;  /* Hacer los botones un poco más pequeños */
+        padding: 8px;
+    }
+
+    .nav-buttons {
+        width: 80%;  /* Hacer los botones un poco más grandes en pantallas pequeñas */
+    }
+}
+
+
+/* Optimización para pantallas más grandes */
+@media (min-width: 1024px) {
+    .book-container {
+        width: 50vw; /* 50% del ancho de la pantalla en computadoras */
+        max-width: 1200px; /* El ancho máximo sigue siendo 1200px */
+        height: 80vh; /* 80% de la altura de la pantalla */
+    }
+}
+
+
+/* Optimización para dispositivos móviles */
+@media (max-width: 768px) {
+    .book-container {
+        width: 80vw; /* El libro ocupará el 80% del ancho de la pantalla */
+        height: 70vh; /* Reducimos la altura del libro */
+    }
+
+    /* Ajustar el tamaño de las fuentes dentro del libro */
+    .page h1, .page h2, .page p {
+        font-size: 1.1rem; /* Reducir tamaño de fuente para dispositivos móviles */
+    }
+
+    /* Estilo de los botones */
+    .nav-buttons button {
+        font-size: 1.5rem; /* Reducir el tamaño de los botones */
+        padding: 8px 15px; /* Ajustar tamaño de los botones */
+    }
+}
+
+/* Para pantallas más pequeñas, como smartphones en modo vertical */
+@media (max-width: 480px) {
+    .book-container {
+        width: 90vw; /* Hacer el libro aún más pequeño en pantallas pequeñas */
+        height: 60vh; /* Ajuste de altura */
+    }
+
+    .nav-buttons button {
+        font-size: 1.2rem; /* Botones aún más pequeños */
+        padding: 6px 12px;
+    }
+
+    /* Ajustar márgenes y espaciado en general */
+    .page {
+        padding: 10px;
+    }
+}
+
+/* Estilo para el texto seleccionado */
+/* Asegurar que el texto no suba al seleccionarlo */
+::selection {
+    background-color: #ffb7b7; /* Color de fondo al seleccionar */
+    color: black; /* Color del texto seleccionado */
+    text-shadow: none; /* Eliminar sombra al seleccionar texto */
+}
+
+/* Para evitar que el texto suba o se mueva */
+.page {
+    user-select: none; /* Prevenir selección de texto */
+    -webkit-user-select: none; /* Para navegadores Webkit como Safari */
+    -moz-user-select: none; /* Para Firefox */
+    -ms-user-select: none; /* Para IE y Edge */
+}
+.page5, .page6, .page7, .page8, .page9 {
+    z-index: 3; /* Asegúrate de que todas las páginas nuevas tengan un índice adecuado */
+    transform-origin: left;
+    transition: transform 0.8s ease; /* Mantén la misma duración y estilo */
+    background-color: #f4e2c5;
+}
+
+/* Inicialmente todas las páginas nuevas estarán volteadas hacia atrás */
+.page5, .page6, .page7, .page8, .page9 {
+    transform: rotateY(-180deg);
+}
+
+/* Estados para las nuevas páginas durante la animación */
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped .page5 {
+    transform: rotateY(0deg); /* Página 5 aparece */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped .page5 {
+    transform: rotateY(-180deg); /* Página 5 se voltea */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped .page6 {
+    transform: rotateY(0deg); /* Página 6 aparece */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped .page6 {
+    transform: rotateY(-180deg); /* Página 6 se voltea */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped .page7 {
+    transform: rotateY(0deg); /* Página 7 aparece */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped.page7-flipped .page7 {
+    transform: rotateY(-180deg); /* Página 7 se voltea */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped.page7-flipped .page8 {
+    transform: rotateY(0deg); /* Página 8 aparece */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped.page7-flipped.page8-flipped .page8 {
+    transform: rotateY(-180deg); /* Página 8 se voltea */
+}
+
+.cover-flipped.page1-flipped.page2-flipped.page3-flipped.page4-flipped.page5-flipped.page6-flipped.page7-flipped.page8-flipped .page9 {
+    transform: rotateY(0deg); /* Página 9 aparece */
+}
+
+.page.flipped {
+    color: transparent; /* Oculta el texto */
+    background-color: #f4e2c5; /* Color de fondo predeterminado */
+    box-shadow: none; /* Opcional: elimina cualquier sombra si no quieres efecto tridimensional */
+}
+/* Estilo para la portada */
+.cover {
+    background-color: #5c4033;
+    color: #f4e2c5;
+    z-index: 5;
+    transition: transform 1.5s ease;
+    transform: rotateY(0deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+}
+
+/* Título grande en la portada */
+.title {
+    font-size: 3rem; /* Tamaño grande */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Autor más pequeño */
+.author {
+    font-size: 1.2rem; /* Tamaño pequeño */
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Estilo para la primera página */
+.page1 {
+    z-index: 4;
+    transform-origin: left;
+    transition: transform 0.8s ease;
+    background-color: #f4e2c5;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Título h2 centrado en la segunda página */
+.page2 h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Subtítulo debajo del título */
+.subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Primera línea del párrafo */
+.page2 p:first-of-type {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el contenido de la segunda página y más */
+.page2, .page3, .page4, .page5, .page6, .page7, .page8, .page9 {
+    z-index: 4;
+    transform-origin: left;
+    transition: transform 0.8s ease;
+    background-color: #f4e2c5;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: justify; /* Texto justificado */
+    margin: 0 auto; /* Centrado del contenido */
+}
+
+/* Alineación centrada para las páginas después de la primera */
+.page2 h2, .page3 h2, .page4 h2, .page5 h2, .page6 h2, .page7 h2, .page8 h2, .page9 h2 {
+    text-align: center; /* Centrado del título */
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+/* Justificación de texto para el resto del contenido */
+.page2 p, .page3 p, .page4 p, .page5 p, .page6 p, .page7 p, .page8 p, .page9 p {
+    text-align: justify;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    width: 70%; /* Solo el texto es más angosto */
+    margin: 0 auto; /* Centrado del contenido */
+}
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .book-container {
+        width: 95%;  /* Hacer el libro más pequeño en pantallas móviles */
+        height: 80vh; /* Ajustar la altura en pantallas móviles */
+    }
+
+    .page h2,
+    .page .subtitle {
+        font-size: 20px;  /* Reducir el tamaño de los títulos */
+    }
+
+    .page p {
+        font-size: 14px;  /* Ajustar el tamaño del texto */
+    }
+
+    .nav-buttons button {
+        font-size: 18px;  /* Ajustar el tamaño de los botones */
+        padding: 8px;
+    }
+}

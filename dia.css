@@ -1,0 +1,178 @@
+body {
+    background: linear-gradient(to bottom, #87CEEB, #b2d9f7); /* Fondo de cielo claro */
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+}
+
+/* Sol visible en la esquina superior derecha */
+#sun {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    background-color: #FFD700; /* Sol amarillo */
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.7); /* Brillo */
+    animation: sunPulse 3s infinite alternate; /* Latido suave */
+    z-index: 10; /* Asegura que esté al frente de todo */
+}
+
+@keyframes sunPulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 50px rgba(255, 215, 0, 0.7);
+    }
+    to {
+        transform: scale(1.1);
+        box-shadow: 0 0 80px rgba(255, 215, 0, 1);
+    }
+}
+
+/* Nubes del día que abarcan todo el alto */
+.cloud {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    animation: moveClouds linear infinite;
+    opacity: 0.8;
+}
+
+/* Variaciones para nubes */
+.cloud:nth-child(1) {
+    width: 180px;
+    height: 90px;
+    top: 10%;
+    left: -200px;
+    animation-duration: 25s;
+}
+
+.cloud:nth-child(2) {
+    width: 250px;
+    height: 120px;
+    top: 30%;
+    left: -300px;
+    animation-duration: 30s;
+    opacity: 0.7;
+}
+
+.cloud:nth-child(3) {
+    width: 200px;
+    height: 100px;
+    top: 60%;
+    left: -400px;
+    animation-duration: 28s;
+    opacity: 0.9;
+}
+
+.cloud:nth-child(4) {
+    width: 220px;
+    height: 110px;
+    top: 80%;
+    left: -500px;
+    animation-duration: 32s;
+}
+
+.cloud:nth-child(5) {
+    width: 150px;
+    height: 80px;
+    top: 50%;
+    left: -100px;
+    animation-duration: 20s;
+    opacity: 0.6;
+}
+
+/* Animación de las nubes */
+@keyframes moveClouds {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(120vw); /* Cruza toda la pantalla */
+    }
+}
+
+/* Optimización para pantallas más pequeñas (smartphones) */
+@media (max-width: 768px) {
+    #sun {
+        width: 80px; /* Tamaño reducido para pantallas pequeñas */
+        height: 80px;
+        top: 10px;
+        right: 10px;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); /* Ajuste del brillo */
+    }
+
+    .cloud {
+        animation-duration: 20s; /* Velocidad ligeramente mayor para pantallas pequeñas */
+    }
+
+    .cloud:nth-child(1),
+    .cloud:nth-child(2),
+    .cloud:nth-child(3),
+    .cloud:nth-child(4),
+    .cloud:nth-child(5) {
+        width: 120px; /* Tamaño reducido */
+        height: 60px;
+    }
+
+    .cloud:nth-child(1) {
+        top: 5%;
+    }
+
+    .cloud:nth-child(2) {
+        top: 25%;
+    }
+
+    .cloud:nth-child(3) {
+        top: 50%;
+    }
+
+    .cloud:nth-child(4) {
+        top: 75%;
+    }
+
+    .cloud:nth-child(5) {
+        top: 90%;
+    }
+
+    .book-container {
+        width: 90vw; /* Se ajusta para llenar el 90% del ancho de la pantalla */
+        height: 60vh; /* Ajusta la altura */
+    }
+
+    .nav-buttons {
+        bottom: 10px; /* Coloca los botones más abajo */
+    }
+
+    .nav-buttons button {
+        padding: 6px 10px; /* Botones más compactos */
+        font-size: 1rem; /* Texto más pequeño */
+    }
+}
+
+@media (max-width: 480px) {
+    #sun {
+        width: 60px;
+        height: 60px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .cloud {
+        animation-duration: 15s; /* Más rápido para pantallas muy pequeñas */
+        opacity: 0.7; /* Menor opacidad para más claridad */
+    }
+
+    .book-container {
+        width: 95vw; /* Más pequeño aún para teléfonos muy angostos */
+        height: 50vh;
+    }
+
+    .nav-buttons button {
+        padding: 4px 8px; /* Botones más pequeños */
+        font-size: 0.8rem;
+    }
+}
